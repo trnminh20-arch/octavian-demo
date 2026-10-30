@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffe6ef">
+  <title>Một món quà nhỏ dành tặng bạn</title>
+  <style>
+    :root {
+      --pink: #f6a9c4;
+      --deep: #c65383;
+      --ink: #75465c;
+      --cream: #fff9fb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--ink);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, #fff 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 30%, #fff8 0 3px, transparent 4px),
+        linear-gradient(145deg, #fff4f8, #ffe0ec 52%, #fff7fa);
+      background-size: 80px 80px, 110px 110px, auto;
+    }
+    .wrap {
+      width: min(92%, 760px);
+      min-height: 100vh;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      padding: 42px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      width: 100%;
+      text-align: center;
+      padding: clamp(26px, 6vw, 54px);
+      border: 1px solid #ffffffc9;
+      border-radius: 30px;
+      background: #ffffffc9;
+      box-shadow: 0 22px 70px #c6538320;
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+    .top-flower { font-size: 42px; margin-bottom: 8px; }
+    .eyebrow {
+      color: #bd7291;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    h1 {
+      color: var(--deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: clamp(32px, 7vw, 53px);
+      line-height: 1.12;
+      margin: 13px 0;
+    }
+    .intro { font-size: 16px; line-height: 1.7; max-width: 510px; margin: 0 auto 25px; }
+    .name-box {
+      display: flex;
+      gap: 9px;
+      max-width: 440px;
+      margin: 0 auto 18px;
+    }
+    input {
+      flex: 1; min-width: 0;
+      border: 1px solid #efbfd1;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font: inherit;
+      color: var(--ink);
+      background: #fffafd;
+      outline: none;
+    }
+    input:focus { border-color: var(--deep); box-shadow: 0 0 0 3px #f6a9c433; }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 23px;
+      color: white;
+      background: linear-gradient(135deg, #ed91b4, #cb5d8d);
+      font: 700 14px inherit;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px #c6538333;
+      transition: transform .2s, box-shadow .2s;
+    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 11px 24px #c6538344; }
+    button:focus-visible { outline: 3px solid #a83e70; outline-offset: 3px; }
+    .open-btn { min-width: 170px; }
+    .letter {
+      display: none;
+      margin: 28px auto 0;
+      max-width: 540px;
+      padding: 25px clamp(18px, 4vw, 34px);
+      border-radius: 22px;
+      background: #fff8fb;
+      border: 1px dashed #e7a2bd;
+      animation: appear .8s ease both;
+    }
+    .letter.show { display: block; }
+    .letter h2 {
+      font-family: Georgia, serif;
+      font-weight: 500;
+      color: var(--deep);
+      font-size: 29px;
+      margin: 0 0 13px;
+    }
+    .letter p { line-height: 1.85; margin: 10px 0; }
+    .signature { color: #bd7291; font-family: Georgia, serif; font-style: italic; font-size: 19px; }
+    .music {
+      position: fixed;
+      right: 18px; bottom: 18px;
+      z-index: 5;
+      padding: 11px 16px;
+      font-size: 13px;
+    }
+    .hint { color: #a77a8d; font-size: 12px; margin-top: 15px; }
+    .heart {
+      position: fixed;
+      bottom: -35px;
+      z-index: 0;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+      opacity: .8;
+    }
+    .petal {
+      position: fixed;
+      top: -30px;
+      z-index: 0;
+      pointer-events: none;
+      animation: fall linear forwards;
+      opacity: .75;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0) rotate(0deg) scale(.8); opacity: 0; }
+      12% { opacity: .8; }
+      to { transform: translateY(-115vh) rotate(35deg) scale(1.25); opacity: 0; }
+    }
+    @keyframes fall {
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(115vh) rotate(420deg); }
+    }
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 520px) {
+      .name-box { flex-direction: column; }
+      .name-box button { width: 100%; }
+      .music { right: 12px; bottom: 12px; }
+      .card { border-radius: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" aria-label="Thiệp chúc mừng">
+      <div class="top-flower" aria-hidden="true">🌷 🌸 🌷</div>
+      <div class="eyebrow">A little note for you</div>
+      <h1>Một món quà nhỏ<br>gửi đến bạn</h1>
+      <p class="intro">
+        Có những điều dễ thương không cần dịp đặc biệt mới nói ra.
+        Hãy nhập tên người nhận và mở tấm thiệp nhỏ này nhé!
+      </p>
+
+      <div class="name-box">
+        <input id="recipient" type="text" maxlength="35" placeholder="Tên người nhận..." aria-label="Tên người nhận">
+        <button id="setName" type="button">Gửi lời chúc</button>
+      </div>
+      <button class="open-btn" id="openCard" type="button">💌 Mở thiệp</button>
+
+      <article class="letter" id="letter" aria-live="polite">
+        <div style="font-size:30px" aria-hidden="true">💗 🌷 💗</div>
+        <h2 id="greeting">Gửi bạn thân mến!</h2>
+        <p>
+          Chúc bạn luôn vui vẻ, bình an và gặp thật nhiều điều tốt đẹp.
+          Mong mỗi ngày của bạn đều có những khoảnh khắc đáng yêu,
+          những nụ cười thật tươi và những người luôn quan tâm, trân trọng bạn.
+        </p>
+        <p>
+          Hãy luôn tự tin, yêu thương bản thân và theo đuổi những điều khiến
+          trái tim bạn thấy hạnh phúc nhé!
+        </p>
+        <p class="signature">Thân gửi, với thật nhiều yêu thương ♡</p>
+      </article>
+      <p class="hint">Một chút dịu dàng dành riêng cho ngày hôm nay ✨</p>
+    </section>
+  </main>
+
+  <button class="music" id="musicButton" type="button" aria-pressed="false">♫ Bật nhạc nền</button>
+
+  <script>
+    const recipient = document.getElementById("recipient");
+    const greeting = document.getElementById("greeting");
+    const letter = document.getElementById("letter");
+    const setName = document.getElementById("setName");
+    const openCard = document.getElementById("openCard");
+    const musicButton = document.getElementById("musicButton");
+
+    function updateName() {
+      const name = recipient.value.trim();
+      greeting.textContent = name ? `Gửi ${name} thân mến!` : "Gửi bạn thân mến!";
+    }
+    setName.addEventListener("click", updateName);
+    recipient.addEventListener("keydown", event => {
+      if (event.key === "Enter") updateName();
+    });
+    openCard.addEventListener("click", () => {
+      updateName();
+      letter.classList.add("show");
+      letter.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      burstHearts(18);
+    });
+
+    function floating(symbol, className, duration, left) {
+      const item = document.createElement("span");
+      item.className = className;
+      item.textContent = symbol;
+      item.style.left = left + "vw";
+      item.style.animationDuration = duration + "s";
+      item.style.fontSize = (14 + Math.random() * 20) + "px";
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(), duration * 1000 + 100);
+    }
+    function burstHearts(count) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => floating(["💗", "💕", "♡", "💖"][Math.floor(Math.random()*4)], "heart", 5 + Math.random()*4, Math.random()*100), i*90);
+      }
+    }
+    setInterval(() => {
+      floating(["💗", "♡", "💕"][Math.floor(Math.random()*3)], "heart", 7 + Math.random()*4, Math.random()*100);
+    }, 850);
+    setInterval(() => {
+      floating(["🌸", "🌷", "✿"][Math.floor(Math.random()*3)], "petal", 8 + Math.random()*5, Math.random()*100);
+    }, 1700);
+
+    // Giai điệu tự tạo bằng Web Audio API; trình duyệt chỉ phát sau khi người dùng bấm nút.
+    let audioContext = null;
+    let musicTimer = null;
+    let noteIndex = 0;
+    let musicOn = false;
+    const melody = [523.25, 659.25, 783.99, 659.25, 587.33, 659.25, 523.25, 392.00];
+    function playNote() {
+      if (!audioContext || !musicOn) return;
+      const now = audioContext.currentTime;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = "sine";
+      osc.frequency.value = melody[noteIndex % melody.length];
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.055, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.48);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start(now);
+      osc.stop(now + 0.5);
+      noteIndex++;
+    }
+    async function toggleMusic() {
+      if (!musicOn) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+          musicButton.textContent = "Trình duyệt không hỗ trợ nhạc";
+          return;
+        }
+        audioContext = audioContext || new AudioContextClass();
+        if (audioContext.state === "suspended") await audioContext.resume();
+        musicOn = true;
+        playNote();
+        musicTimer = setInterval(playNote, 520);
+        musicButton.textContent = "♫ Tắt nhạc nền";
+        musicButton.setAttribute("aria-pressed", "true");
+      } else {
+        musicOn = false;
+        clearInterval(musicTimer);
+        musicButton.textContent = "♫ Bật nhạc nền";
+        musicButton.setAttribute("aria-pressed", "false");
+      }
+    }
+    musicButton.addEventListener("click", toggleMusic);
+  </script>
+</body>
+</html>
